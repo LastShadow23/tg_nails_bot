@@ -1,0 +1,7 @@
+.env
+database/clients.db
+.mypy_cache/
+.vscode/
+venv/
+__pycache__/
+manicure-400214-849dbff997d8.json
