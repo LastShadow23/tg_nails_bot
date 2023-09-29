@@ -5,7 +5,7 @@ from sqlalchemy import Integer, String, Boolean, DateTime
 from datetime import datetime
 
 
-sqlite_database = "sqlite:///clients.db"
+sqlite_database = "sqlite+aiosqlite:///clients.db"
 
 engine = create_async_engine(sqlite_database)
 
@@ -24,7 +24,7 @@ class Client(Base):
     time: Mapped[str] = mapped_column(String(10))
     name: Mapped[str] = mapped_column(String(30))
     booking: Mapped[Boolean] = mapped_column(Boolean)
-    tg_id: Mapped[int] = mapped_column(Integer)
+    id_tg: Mapped[int] = mapped_column(Integer)
 
 
 async def async_main():
