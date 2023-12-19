@@ -12,7 +12,10 @@ async def main():
     bot = Bot(os.getenv('TOKEN'))
     dp = Dispatcher()
     dp.include_router(router)
-    await dp.start_polling(bot)
+    try:
+        await dp.start_polling(bot)
+    finally:
+        await bot.session.close()
 
 
 if __name__ == '__main__':

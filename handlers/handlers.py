@@ -32,12 +32,26 @@ async def sos(message: Message):
     await message.answer('Выберите категорию', reply_markup=kb.sos)
 
 
+@router.message(F.text == '💅 Запись')
+async def echo(message: Message):
+    await message.answer('Доступное время для записи', reply_markup=await kb.free_records())
+
+
 @router.callback_query(F.data == 'Telegram')
 async def telegram(callback: CallbackQuery):
     await callback.message.answer(f'Вы выбрали {callback.data}')
 
 
-@router.message()
-async def echo(message: Message):
-    free = await get_free_app()
-    await message.answer(f"вот: {free}")
+@router.callback_query(F.data.startswith('book_'))
+async def select_date(callback: CallbackQuery):
+    try:
+        _, day, month, year, hour, minute = callback.data.split('_')
+    except Exception:
+        return
+    print(day, month, year, hour, minute)
+    print(callback.message.from_user.id)
+
+
+
+
+
